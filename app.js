@@ -1,36 +1,49 @@
-//Variables
-let numeroSecreto=Math.floor(Math.random()*10);
-let numeroUsuario=0;
-let contador=1;
-//let palabra="vez"
-let  maximo=6;
-console.log(numeroSecreto);
+let listaAmigos=[];
 
-while(numeroUsuario !=numeroSecreto){
-    numeroUsuario= prompt("Me indicas un numero entre 1 y 10por favor");
+function limpiarCaja(){
+    let valorCaja=document.querySelector('#amigo');
+    valorCaja.value='';
+}
 
-    /*
-    Aca  se realiza la
-    comparacion
-    */
-    if (numeroUsuario==numeroSecreto){
-        // La condicion se cumplio
-        alert(`Acertaste, el numero es: ${numeroUsuario} Lo hiciste en ${contador} ${contador ==1 ? "vez" : "veces"} `);
-        // La condicion no cumple
-    } else{
-        if (numeroUsuario> numeroSecreto){
-            alert("El numero es menor");
+function asignarTextoElemento(elemento, texto) {
+    let elementoHTML = document.querySelector(elemento);
+    elementoHTML.innerHTML = texto;
+}
 
-        }else{
-            alert("El numero es mayor");
-        }
-        //incrementamos cuando no acierta
-        contador++;
-        //palabra="veces";
-        if (contador>maximo){
-            alert(`Superaste los  ${maximo} de intentos`)
-            break
-        }
-    }
+function mostrarLista() {
+    let ul = document.getElementById("listaAmigos");
+    ul.innerHTML = ""; 
     
+    listaAmigos.forEach(amigo => {
+        let li = document.createElement("li");
+        li.textContent = amigo;
+        ul.appendChild(li);
+    });
+}
+
+function agregarAmigo(){
+    let nombreAmigo = document.getElementById('amigo').value;
+    if (nombreAmigo==''){
+        alert('Debes colocar un nombre valido');
+    } else{
+        listaAmigos.push(nombreAmigo);
+        mostrarLista();
+    }
+    limpiarCaja();
+    console.log(nombreAmigo);
+    console.log(listaAmigos);
+}
+
+function sortearAmigo(){
+    console.log(listaAmigos);
+    if (listaAmigos.length === 0) {
+        alert("Incluye al menos un nombre antes de sortear");
+        return;
+    }
+    let indice = Math.floor(Math.random() * listaAmigos.length);
+    let amigoSecreto = listaAmigos[indice];
+    asignarTextoElemento("#resultado", "El amigo secreto es: " + amigoSecreto);
+    listaAmigos=[];
+    mostrarLista();
+    console.log(listaAmigos);
 }

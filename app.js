@@ -30,7 +30,6 @@ function agregarAmigo(){
         mostrarLista();
     }
     limpiarCaja();
-    console.log(nombreAmigo);
     console.log(listaAmigos);
 }
 
@@ -45,5 +44,5 @@ function sortearAmigo(){
     asignarTextoElemento("#resultado", "El amigo secreto es: " + amigoSecreto);
     listaAmigos=[];
     mostrarLista();
-    console.log(listaAmigos);
 }
+
